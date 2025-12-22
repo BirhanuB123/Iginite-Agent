@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Request } from 'express';
+import { BadRequestException } from '@nestjs/common';
 
 @Injectable()
 export class TenantResolver {
@@ -8,7 +9,7 @@ export class TenantResolver {
 
     if (mode === 'header') {
       const header = req.header('x-tenant-id');
-      if (!header) throw new Error('Missing X-Tenant-Id header');
+      if (!header) throw new BadRequestException('Missing X-Tenant-Id header');
       return header;
     }
 

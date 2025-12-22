@@ -8,12 +8,14 @@ import { WorkflowModule } from './modules/workflow/workflow.module';
 import { AgentModule } from './modules/agent/agent.module';
 import { TenantMiddleware } from './common/tenant/tenant.middleware';
 import { AuditModule } from './common/audit/audit.module';
+import { AuthModule } from './common/auth/auth.model';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
     TenancyModule,
+    AuthModule,
     AuditModule,
     KnowledgeModule,
     WorkflowModule,

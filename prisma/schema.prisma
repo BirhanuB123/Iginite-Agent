@@ -51,13 +51,13 @@ model User {
   id        String   @id @db.Uuid
   tenantId  String   @db.Uuid
   email     String
-  name      String?
+  name      String
+  password  String
   status    String   @default("ACTIVE")
   createdAt DateTime @default(now())
 
-  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  tenant Tenant @relation(fields: [tenantId], references: [id])
 
-  @@index([tenantId])
   @@unique([tenantId, email])
   @@map("users")
 }

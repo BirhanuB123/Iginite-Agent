@@ -1,0 +1,185 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TeamVisibility {
+  CLIENT
+  INTERNAL
+}
+
+enum WorkItemStatus {
+  NEW
+  TRIAGED
+  IN_PROGRESS
+  BLOCKED
+  DONE
+  CANCELED
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Tenant {
+  id           String   @id @db.Uuid
+  name         String
+  status       String   @default("ACTIVE")
+  settingsJson Json     @default("{}")
+  createdAt    DateTime @default(now())
+
+  users        User[]
+  teams        Team[]
+  workItems    WorkItem[]
+  approvals    Approval[]
+  documents    Document[]
+  chunks       DocumentChunk[]
+  auditEvents  AuditEvent[]
+
+  @@map("tenants")
+}
+
+model User {
+  id        String   @id @db.Uuid
+  tenantId  String   @db.Uuid
+  email     String
+  name      String?
+  status    String   @default("ACTIVE")
+  createdAt DateTime @default(now())
+
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
+  @@unique([tenantId, email])
+  @@map("users")
+}
+
+model Team {
+  id          String         @id @db.Uuid
+  tenantId    String         @db.Uuid
+  name        String
+  description String?
+  visibility  TeamVisibility @default(CLIENT)
+  createdAt   DateTime       @default(now())
+
+  tenant      Tenant         @relation(fields: [tenantId], references: [id])
+  capabilities TeamCapability[]
+  workItems   WorkItem[]     @relation("WorkItemsAssignedTeam")
+
+  @@index([tenantId])
+  @@unique([tenantId, name])
+  @@map("teams")
+}
+
+model TeamCapability {
+  id        String   @id @db.Uuid
+  tenantId  String   @db.Uuid
+  teamId    String   @db.Uuid
+  capability String
+  slaJson    Json     @default("{}")
+  raciJson   Json     @default("{}")
+  createdAt DateTime @default(now())
+
+  tenant    Tenant @relation(fields: [tenantId], references: [id])
+  team      Team   @relation(fields: [teamId], references: [id])
+
+  @@index([tenantId, teamId])
+  @@map("team_capabilities")
+}
+
+model WorkItem {
+  id              String        @id @db.Uuid
+  tenantId         String        @db.Uuid
+  type            String
+  title           String
+  details         String?
+  status          WorkItemStatus @default(NEW)
+  priority        String         @default("MEDIUM")
+  requestedBy     String?        @db.Uuid
+  assignedTeamId  String?        @db.Uuid
+  externalRefsJson Json          @default("{}")
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  tenant          Tenant         @relation(fields: [tenantId], references: [id])
+  assignedTeam    Team?          @relation("WorkItemsAssignedTeam", fields: [assignedTeamId], references: [id])
+  approvals       Approval[]
+
+  @@index([tenantId])
+  @@map("work_items")
+}
+
+model Approval {
+  id          String        @id @db.Uuid
+  tenantId    String        @db.Uuid
+  workItemId  String        @db.Uuid
+  requiredRole String
+  status      ApprovalStatus @default(PENDING)
+  approvedBy  String?       @db.Uuid
+  approvedAt  DateTime?
+  createdAt   DateTime      @default(now())
+
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  workItem    WorkItem @relation(fields: [workItemId], references: [id])
+
+  @@index([tenantId, workItemId])
+  @@map("approvals")
+}
+
+model Document {
+  id          String   @id @db.Uuid
+  tenantId    String   @db.Uuid
+  corpus      String
+  title       String
+  sourceUri   String?
+  accessLevel String   @default("TENANT")
+  metadataJson Json    @default("{}")
+  createdAt   DateTime @default(now())
+
+  tenant      Tenant @relation(fields: [tenantId], references: [id])
+  chunks      DocumentChunk[]
+
+  @@index([tenantId, corpus])
+  @@map("documents")
+}
+
+model DocumentChunk {
+  id         String   @id @db.Uuid
+  tenantId   String   @db.Uuid
+  documentId String   @db.Uuid
+  chunkText  String
+  chunkHash  String
+  createdAt  DateTime @default(now())
+
+  // NOTE: Embedding is stored in SQL migration as vector(1536) column.
+  // Prisma doesn't yet natively model pgvector well across all environments;
+  // we keep it as an unsupported column and query via raw SQL in the KnowledgeService.
+
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+  document   Document @relation(fields: [documentId], references: [id])
+
+  @@index([tenantId, documentId])
+  @@map("document_chunks")
+}
+
+model AuditEvent {
+  id          String   @id @db.Uuid
+  tenantId    String   @db.Uuid
+  actorUserId String?  @db.Uuid
+  eventType   String
+  toolName    String?
+  requestJson Json     @default("{}")
+  responseJson Json    @default("{}")
+  createdAt   DateTime @default(now())
+
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId, createdAt])
+  @@map("audit_events")
+}

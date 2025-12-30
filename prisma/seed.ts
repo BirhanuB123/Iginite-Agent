@@ -13,9 +13,10 @@ async function main() {
   console.log('🌱 Seeding Ignite-Agent database...');
 
   const tenantId = '00000000-0000-0000-0000-000000000001';
+  const tenantId2 = '00000000-0000-0000-0000-000000000002';
 
   // -----------------------------
-  // TENANT
+  // TENANTS
   // -----------------------------
   await prisma.tenant.upsert({
     where: { id: tenantId },
@@ -23,6 +24,19 @@ async function main() {
     create: {
       id: tenantId,
       name: 'Ignite Demo Tenant',
+      status: 'ACTIVE',
+      settingsJson: {
+        environment: 'local',
+      },
+    },
+  });
+
+  await prisma.tenant.upsert({
+    where: { id: tenantId2 },
+    update: {},
+    create: {
+      id: tenantId2,
+      name: 'Second Test Tenant',
       status: 'ACTIVE',
       settingsJson: {
         environment: 'local',

@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class AuthService {
@@ -11,40 +11,40 @@ export class AuthService {
   ) {}
 
   async login(email: string, password: string, tenantId: string) {
-  // 🔐 REQUIRED FOR RLS
-  await this.prisma.setTenantContext(tenantId);
+    // Login doesn't use RLS - we query directly with tenant filter
+    // We use the base PrismaClient, not the request-scoped transaction
+    const user = await this.prisma.user.findFirst({
+      where: {
+        tenantId,
+        email,
+        status: 'ACTIVE',
+      },
+    });
 
-  const user = await this.prisma.user.findFirst({
-    where: {
-      tenantId,
-      email,
-      status: 'ACTIVE',
-    },
-  });
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
 
-  if (!user) {
-    throw new UnauthorizedException('Invalid credentials');
-  }
+    const ok = await bcrypt.compare(password, user.password);
+    if (!ok) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
 
-  const ok = await bcrypt.compare(password, user.password);
-  if (!ok) {
-    throw new UnauthorizedException('Invalid credentials');
-  }
-
-  const payload = {
-    sub: user.id,
-    tenantId: user.tenantId,
-    roles: ['CLIENT'],
-  };
-
-  return {
-    accessToken: this.jwt.sign(payload),
-    tenantId: user.tenantId,
-    user: {
-      id: user.id,
+    const payload = {
+      sub: user.id,
+      tenantId: user.tenantId,
       email: user.email,
-      name: user.name,
-    },
-  };
-}
+      roles: ['CLIENT'],
+    };
+
+    return {
+      accessToken: this.jwt.sign(payload),
+      tenantId: user.tenantId,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+      },
+    };
+  }
 }

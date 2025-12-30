@@ -7,6 +7,9 @@ export async function apiFetch(
   const token = getToken();
   const tenantId = getTenantId();
 
+  // Don't add tenant header for auth endpoints
+  const isAuthEndpoint = path.startsWith("/auth/");
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE}${path}`,
     {
@@ -15,7 +18,7 @@ export async function apiFetch(
         "Content-Type": "application/json",
         ...(options.headers || {}),
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        ...(tenantId ? { "X-Tenant-Id": tenantId } : {}),
+        ...(!isAuthEndpoint && tenantId ? { "X-Tenant-Id": tenantId } : {}),
       },
     }
   );

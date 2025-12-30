@@ -4,6 +4,7 @@ import { ToolRegistryService } from '../tools/tool-registry.service';
 import { AuditService } from '../../common/audit/audit.service';
 import { PolicyService } from '../../common/auth/policy.service';
 import { TenantContext } from '../../common/tenant/tenant-context';
+import type { ChatCompletionMessageParam, ChatCompletionTool } from 'openai/resources/chat/completions';
 
 @Injectable()
 export class OrchestratorService {
@@ -23,56 +24,71 @@ export class OrchestratorService {
     /** -----------------------------
      * 1. Tool definitions
      * ----------------------------- */
-    const toolDefs = this.tools.list().map((t) => ({
+    const toolDefs: ChatCompletionTool[] = this.tools.list().map((t) => ({
       type: 'function' as const,
+      function: {
       name: t.name,
       description: t.description,
       parameters: t.inputSchema,
       strict: true,
+      },
     }));
 
     /** -----------------------------
-     * 2. Initial request
+     * 2. Message history
      * ----------------------------- */
-    let response = await this.client.responses.create({
-      model: process.env.OPENAI_MODEL ?? 'gpt-4.1-mini',
-      input: [
+    const messages: ChatCompletionMessageParam[] = [
         {
           role: 'system',
-          content: [
-            { type: 'input_text', text: this.systemInstructions() },
-          ],
+        content: this.systemInstructions(),
         },
         {
           role: 'user',
-          content: [
-            { type: 'input_text', text: userMessage },
-          ],
+        content: userMessage,
         },
-      ],
-      tools: toolDefs,
-    });
+    ];
 
     /** -----------------------------
      * 3. Tool loop
      * ----------------------------- */
-    for (let i = 0; i < 8; i++) {
-      const toolCalls = (response.output ?? []).filter(
-        (item): item is any => item.type === 'function_call',
-      );
+    let iterations = 0;
+    const maxIterations = 8;
 
-      if (toolCalls.length === 0) break;
+    while (iterations < maxIterations) {
+      iterations++;
 
-      const toolOutputs: {
-        type: 'function_call_output';
-        call_id: string;
-        output: string;
-      }[] = [];
+      const response = await this.client.chat.completions.create({
+        model: process.env.OPENAI_MODEL ?? 'gpt-4o-mini',
+        messages,
+        tools: toolDefs.length > 0 ? toolDefs : undefined,
+        tool_choice: 'auto',
+      });
 
-      for (const call of toolCalls) {
-        const toolName = call.name;
-        const input = safeJson(call.arguments);
+      const assistantMessage = response.choices[0]?.message;
+      if (!assistantMessage) {
+        throw new Error('No response from OpenAI');
+      }
 
+      // Add assistant message to history
+      messages.push(assistantMessage);
+
+      // Check if there are tool calls
+      const toolCalls = assistantMessage.tool_calls;
+      if (!toolCalls || toolCalls.length === 0) {
+        // No more tool calls, return the final response
+        return {
+          text: assistantMessage.content ?? 'No response generated.',
+          conversationId: response.id,
+          iterations,
+        };
+      }
+
+      // Execute tool calls
+      for (const toolCall of toolCalls) {
+        const toolName = toolCall.function.name;
+        const input = safeJson(toolCall.function.arguments);
+
+        // Check authorization
         if (!this.policy.canExecuteTool(ctx, toolName, input)) {
           const denied = { error: 'NOT_AUTHORIZED', tool: toolName };
 
@@ -85,14 +101,16 @@ export class OrchestratorService {
             denied,
           );
 
-          toolOutputs.push({
-            type: 'function_call_output',
-            call_id: call.call_id,
-            output: JSON.stringify(denied),
+          messages.push({
+            role: 'tool',
+            tool_call_id: toolCall.id,
+            content: JSON.stringify(denied),
           });
           continue;
         }
 
+        // Execute tool
+        try {
         const tool = this.tools.get(toolName);
         const result = await tool.handler(ctx, input);
 
@@ -105,40 +123,61 @@ export class OrchestratorService {
           result,
         );
 
-        toolOutputs.push({
-          type: 'function_call_output',
-          call_id: call.call_id,
-          output: JSON.stringify(result),
+          messages.push({
+            role: 'tool',
+            tool_call_id: toolCall.id,
+            content: JSON.stringify(result),
         });
-      }
+        } catch (error: any) {
+          const errorResult = {
+            error: 'TOOL_EXECUTION_FAILED',
+            tool: toolName,
+            message: error.message || 'Unknown error',
+          };
 
-      response = await this.client.responses.create({
-        model: process.env.OPENAI_MODEL ?? 'gpt-4.1-mini',
-        previous_response_id: response.id,
-        input: toolOutputs,
+          await this.audit.log(
+            ctx.tenantId,
+            ctx.userId,
+            'TOOL_ERROR',
+            toolName,
+            input,
+            errorResult,
+          );
+
+          messages.push({
+            role: 'tool',
+            tool_call_id: toolCall.id,
+            content: JSON.stringify(errorResult),
       });
+        }
+      }
     }
 
-    /** -----------------------------
-     * 4. Final output
-     * ----------------------------- */
+    // If we reach max iterations, return the last assistant message
+    const lastAssistantMessage = messages
+      .slice()
+      .reverse()
+      .find((m) => m.role === 'assistant');
+
     return {
-      text:
-        typeof response.output_text === 'string'
-          ? response.output_text
-          : 'No response text generated.',
-      responseId: response.id,
+      text: (lastAssistantMessage as any)?.content ?? 'Max iterations reached without final response.',
+      conversationId: 'max-iterations',
+      iterations,
     };
   }
 
   private systemInstructions(): string {
     return [
-      'You are Ignite-Agent.',
+      'You are Ignite-Agent, a multi-tenant AI assistant with access to specialized tools.',
+      '',
       'Rules:',
-      '- Never mix data across tenants.',
-      '- Use tools for factual statements.',
-      '- If information is missing, suggest creating a request.',
-      '- Keep responses professional and concise.',
+      '- NEVER mix data across tenants - tenant isolation is critical.',
+      '- Always use tools to retrieve factual information from the knowledge base.',
+      '- When asked about documents, policies, or procedures, use search_knowledge.',
+      '- When creating work items or requests, use create_client_request.',
+      '- If information is missing or unclear, ask clarifying questions.',
+      '- Keep responses professional, concise, and helpful.',
+      '- Cite sources when providing information from documents.',
     ].join('\n');
   }
 }

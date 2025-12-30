@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
@@ -39,10 +39,7 @@ export class TenantsService {
       },
     });
 
-    // 🔐 Set tenant context for RLS
-    await this.prisma.setTenantContext(tenantId);
-
-    // Create admin user
+    // Create admin user (RLS not needed for signup - direct queries with tenantId)
     await this.prisma.user.create({
       data: {
         id: userId,

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TenantsService } from './tenants.service';
 import { TenantsController } from './tenants.controller';
-import { PrismaModule } from '../../prisma/prisma.module';
+import { PrismaModule } from '../../common/prisma/prisma.module';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({

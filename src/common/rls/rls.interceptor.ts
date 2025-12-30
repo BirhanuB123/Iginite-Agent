@@ -12,6 +12,11 @@ export class RlsInterceptor implements NestInterceptor {
     const req: any = http.getRequest();
     const tenant = req.tenantContext;
 
+    // Skip RLS for routes without tenant context (e.g., auth routes)
+    if (!tenant || !tenant.tenantId) {
+      return next.handle();
+    }
+
     // Each request runs inside an interactive transaction to guarantee SET LOCAL.
     return from(
       this.prisma.$transaction(async (tx) => {

@@ -157,6 +157,7 @@ model DocumentChunk {
   documentId String   @db.Uuid
   chunkText  String
   chunkHash  String
+  embedding  Unsupported("vector(1536)")?
   createdAt  DateTime @default(now())
 
   // NOTE: Embedding is stored in SQL migration as vector(1536) column.

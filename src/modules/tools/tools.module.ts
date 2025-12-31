@@ -20,13 +20,30 @@ export class ToolsModule implements OnModuleInit {
   onModuleInit() {
     this.registry.register({
       name: 'search_knowledge',
-      description: 'Search tenant knowledge base by corpus with citations.',
+      description: 'Search tenant knowledge base using semantic search with automatic query expansion and relevance reranking for highly accurate results. Returns relevant document chunks with citations.',
       inputSchema: {
         type: 'object',
         properties: {
-          query: { type: 'string' },
-          corpus: { type: 'string', description: 'client_public | client_private | internal' },
-          topK: { type: 'number' },
+          query: { 
+            type: 'string',
+            description: 'The user question or search query'
+          },
+          corpus: { 
+            type: 'string', 
+            description: 'Knowledge base corpus: client_public (publicly shareable), client_private (confidential), or internal (company-internal)' 
+          },
+          topK: { 
+            type: 'number',
+            description: 'Number of results to return (default: 5, max: 15)'
+          },
+          enableQueryExpansion: {
+            type: 'boolean',
+            description: 'Generate alternative query phrasings for better retrieval (default: true)'
+          },
+          rerank: {
+            type: 'boolean',
+            description: 'Use LLM-based reranking for better relevance (default: true)'
+          },
         },
         required: ['query', 'corpus'],
         additionalProperties: false,

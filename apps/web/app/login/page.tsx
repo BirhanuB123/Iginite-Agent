@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { apiFetch } from "../../lib/api";
 import { setSession } from "../../lib/auth";
 
@@ -329,9 +330,42 @@ export default function LoginPage() {
             <span>Test Credentials</span>
           </div>
           <div style={{ fontSize: "12px" }}>
-            <div>Email: <span style={{ color: "rgba(102, 126, 234, 0.9)", fontWeight: "500" }}>client@acme.com</span></div>
-            <div>Password: <span style={{ color: "rgba(102, 126, 234, 0.9)", fontWeight: "500" }}>password123</span></div>
+            <div>Email: <span style={{ color: "rgba(124, 58, 237, 0.9)", fontWeight: "500" }}>client@acme.com</span></div>
+            <div>Password: <span style={{ color: "rgba(124, 58, 237, 0.9)", fontWeight: "500" }}>password123</span></div>
           </div>
+        </div>
+
+        <div style={{
+          marginTop: "24px",
+          textAlign: "center",
+          padding: "18px 20px",
+          background: "rgba(255, 255, 255, 0.03)",
+          backdropFilter: "blur(10px)",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          borderRadius: "12px"
+        }}>
+          <p style={{
+            fontSize: "14px",
+            color: "rgba(255, 255, 255, 0.6)",
+            margin: 0
+          }}>
+            Don't have an account?{" "}
+            <Link href="/signup" style={{
+              color: "rgba(124, 58, 237, 0.9)",
+              textDecoration: "none",
+              fontWeight: "600",
+              transition: "all 0.3s ease"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "rgba(59, 130, 246, 0.9)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "rgba(124, 58, 237, 0.9)";
+            }}
+            >
+              Create Account
+            </Link>
+          </p>
         </div>
       </div>
 

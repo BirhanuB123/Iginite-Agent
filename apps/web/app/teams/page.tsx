@@ -312,47 +312,63 @@ export default function TeamsPage() {
               gap: "24px"
             }}>
               {teams.map((team) => (
-                <div
-                  key={team.id}
-                  style={{
-                    background: "rgba(255, 255, 255, 0.05)",
-                    backdropFilter: "blur(20px)",
-                    WebkitBackdropFilter: "blur(20px)",
-                    borderRadius: "16px",
-                    padding: "28px",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-                    transition: "all 0.3s ease",
-                    cursor: "pointer"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-4px)";
-                    e.currentTarget.style.boxShadow = "0 14px 44px 0 rgba(168, 85, 247, 0.5), 0 0 30px rgba(99, 102, 241, 0.3)";
-                    e.currentTarget.style.border = "1px solid rgba(168, 85, 247, 0.4)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(31, 38, 135, 0.37)";
-                    e.currentTarget.style.border = "1px solid rgba(255, 255, 255, 0.08)";
-                  }}
+                <Link 
+                  key={team.id} 
+                  href={`/teams/${team.id}`}
+                  style={{ textDecoration: "none" }}
                 >
-                  <h3 style={{
-                    fontSize: "20px",
-                    fontWeight: "700",
-                    color: "rgba(255, 255, 255, 0.95)",
-                    marginBottom: "12px"
-                  }}>
-                    {team.name}
-                  </h3>
-                  <p style={{
-                    color: "rgba(255, 255, 255, 0.6)",
-                    fontSize: "14px",
-                    lineHeight: "1.6",
-                    margin: 0
-                  }}>
-                    {team.description}
-                  </p>
-                </div>
+                  <div
+                    style={{
+                      background: "rgba(255, 255, 255, 0.05)",
+                      backdropFilter: "blur(20px)",
+                      WebkitBackdropFilter: "blur(20px)",
+                      borderRadius: "16px",
+                      padding: "28px",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+                      transition: "all 0.3s ease",
+                      cursor: "pointer"
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-4px)";
+                      e.currentTarget.style.boxShadow = "0 14px 44px 0 rgba(168, 85, 247, 0.5), 0 0 30px rgba(99, 102, 241, 0.3)";
+                      e.currentTarget.style.border = "1px solid rgba(168, 85, 247, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(31, 38, 135, 0.37)";
+                      e.currentTarget.style.border = "1px solid rgba(255, 255, 255, 0.08)";
+                    }}
+                  >
+                    <h3 style={{
+                      fontSize: "20px",
+                      fontWeight: "700",
+                      color: "rgba(255, 255, 255, 0.95)",
+                      marginBottom: "12px"
+                    }}>
+                      {team.name}
+                    </h3>
+                    <p style={{
+                      color: "rgba(255, 255, 255, 0.6)",
+                      fontSize: "14px",
+                      lineHeight: "1.6",
+                      margin: 0
+                    }}>
+                      {team.description}
+                    </p>
+                    <div style={{
+                      marginTop: "16px",
+                      fontSize: "13px",
+                      color: "rgba(168, 85, 247, 0.9)",
+                      fontWeight: "600",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px"
+                    }}>
+                      View Details →
+                    </div>
+                  </div>
+                </Link>
               ))}
             </div>
           </>

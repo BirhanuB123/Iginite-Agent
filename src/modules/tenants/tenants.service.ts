@@ -51,15 +51,22 @@ export class TenantsService {
       },
     });
 
-    // Seed default teams
-    const defaultTeams = ['HR', 'Finance', 'Engineering', 'DevOps', 'Security'];
+    // Seed default teams for new MuleWave clients
+    const defaultTeams = [
+      { name: 'MuleSoft Integration', description: 'Expert team specializing in MuleSoft Anypoint Platform integration solutions' },
+      { name: 'API Development', description: 'Building scalable and secure REST APIs and microservices' },
+      { name: 'Cloud Solutions', description: 'Cloud infrastructure and integration on AWS, Azure, and GCP' },
+      { name: 'DevOps & CI/CD', description: 'Continuous integration, deployment, and infrastructure automation' },
+      { name: 'Support & Maintenance', description: '24/7 support and maintenance for production integrations' },
+    ];
 
-    for (const name of defaultTeams) {
+    for (const team of defaultTeams) {
       await this.prisma.team.create({
         data: {
           id: randomUUID(),
           tenantId,
-          name,
+          name: team.name,
+          description: team.description,
           visibility: 'CLIENT',
         },
       });

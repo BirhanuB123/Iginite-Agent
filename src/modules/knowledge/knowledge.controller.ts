@@ -56,6 +56,9 @@ export class KnowledgeController {
       query: string;
       corpus: string;
       topK?: number;
+      similarityThreshold?: number;
+      enableQueryExpansion?: boolean;
+      rerank?: boolean;
     },
   ) {
     // Validation
@@ -71,6 +74,10 @@ export class KnowledgeController {
       throw new BadRequestException('topK must be between 1 and 50');
     }
 
+    if (body.similarityThreshold && (body.similarityThreshold < 0 || body.similarityThreshold > 1)) {
+      throw new BadRequestException('similarityThreshold must be between 0 and 1');
+    }
+
     const ctx = req.tenantContext;
     
     try {
@@ -79,6 +86,11 @@ export class KnowledgeController {
         body.query,
         body.corpus,
         body.topK ?? 5,
+        {
+          similarityThreshold: body.similarityThreshold,
+          enableQueryExpansion: body.enableQueryExpansion,
+          rerank: body.rerank,
+        }
       );
     } catch (error: any) {
       throw new BadRequestException(`Failed to search knowledge base: ${error.message}`);

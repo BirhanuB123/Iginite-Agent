@@ -7,6 +7,7 @@ import { KnowledgeModule } from './modules/knowledge/knowledge.module';
 import { WorkflowModule } from './modules/workflow/workflow.module';
 import { AgentModule } from './modules/agent/agent.module';
 import { TenantsModule } from './modules/tenants/tenants.module';
+import { TeamsModule } from './modules/teams/teams.module';
 import { TenantMiddleware } from './common/tenant/tenant.middleware';
 import { AuditModule } from './common/audit/audit.module';
 import { AuthModule } from './common/auth/auth.module';
@@ -20,6 +21,7 @@ import { HealthController } from './health.controller';
     AuthModule,
     AuditModule,
     TenantsModule,
+    TeamsModule,
     KnowledgeModule,
     WorkflowModule,
     ToolsModule,

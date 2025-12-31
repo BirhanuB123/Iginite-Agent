@@ -45,18 +45,18 @@ export default function LoginPage() {
       alignItems: "center",
       justifyContent: "center",
       background: `
-        linear-gradient(135deg, rgba(15, 12, 41, 0.95) 0%, rgba(48, 43, 99, 0.95) 50%, rgba(36, 36, 62, 0.95) 100%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(99, 102, 241, 0.03) 2px, rgba(99, 102, 241, 0.03) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 92, 246, 0.03) 2px, rgba(139, 92, 246, 0.03) 4px),
-        radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)
+        linear-gradient(135deg, #0a0e27 0%, #1a1147 30%, #2d1b69 60%, #1e3a8a 100%),
+        radial-gradient(circle at 25% 35%, rgba(124, 58, 237, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 75% 65%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(124, 58, 237, 0.06) 2px, rgba(124, 58, 237, 0.06) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(59, 130, 246, 0.06) 2px, rgba(59, 130, 246, 0.06) 4px)
       `,
-      backgroundSize: "100% 100%, 50px 50px, 50px 50px, 100% 100%, 100% 100%",
+      backgroundSize: "100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px",
       padding: "20px",
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Neural Network Pattern Background */}
+      {/* AI Security Matrix Background */}
       <div style={{
         position: "absolute",
         top: 0,
@@ -64,39 +64,39 @@ export default function LoginPage() {
         right: 0,
         bottom: 0,
         backgroundImage: `
-          radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-          radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-          radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
-          radial-gradient(circle at 60% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%)
+          radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
+          radial-gradient(circle at 60% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%)
         `,
-        opacity: 0.6
+        opacity: 0.7
       }} />
       
-      {/* Animated Circuit Lines */}
+      {/* Animated Energy Orbs */}
       <div style={{
         position: "absolute",
-        top: "10%",
-        left: "10%",
-        width: "300px",
-        height: "300px",
-        background: "radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%)",
-        borderRadius: "50%",
-        filter: "blur(60px)",
-        animation: "float 6s ease-in-out infinite"
-      }} />
-      <div style={{
-        position: "absolute",
-        bottom: "10%",
-        right: "10%",
+        top: "12%",
+        left: "12%",
         width: "400px",
         height: "400px",
-        background: "radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, rgba(139, 92, 246, 0.2) 40%, transparent 70%)",
+        borderRadius: "50%",
+        filter: "blur(70px)",
+        animation: "float 7s ease-in-out infinite"
+      }} />
+      <div style={{
+        position: "absolute",
+        bottom: "12%",
+        right: "12%",
+        width: "450px",
+        height: "450px",
+        background: "radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(37, 99, 235, 0.2) 40%, transparent 70%)",
         borderRadius: "50%",
         filter: "blur(80px)",
-        animation: "float 8s ease-in-out infinite reverse"
+        animation: "float 9s ease-in-out infinite reverse"
       }} />
       
-      {/* Hexagonal Tech Pattern */}
+      {/* Cyber Grid Pattern */}
       <div style={{
         position: "absolute",
         top: 0,
@@ -104,11 +104,11 @@ export default function LoginPage() {
         right: 0,
         bottom: 0,
         backgroundImage: `
-          linear-gradient(30deg, transparent 45%, rgba(99, 102, 241, 0.02) 45%, rgba(99, 102, 241, 0.02) 55%, transparent 55%),
-          linear-gradient(150deg, transparent 45%, rgba(139, 92, 246, 0.02) 45%, rgba(139, 92, 246, 0.02) 55%, transparent 55%)
+          linear-gradient(45deg, transparent 47%, rgba(124, 58, 237, 0.03) 47%, rgba(124, 58, 237, 0.03) 53%, transparent 53%),
+          linear-gradient(-45deg, transparent 47%, rgba(59, 130, 246, 0.03) 47%, rgba(59, 130, 246, 0.03) 53%, transparent 53%)
         `,
-        backgroundSize: "60px 105px",
-        opacity: 0.5
+        backgroundSize: "80px 80px",
+        opacity: 0.6
       }} />
       
       {/* Login Card */}
@@ -133,18 +133,18 @@ export default function LoginPage() {
           <div style={{
             display: "inline-block",
             padding: "20px",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            borderRadius: "20px",
-            boxShadow: "0 8px 24px rgba(102, 126, 234, 0.4)",
+            background: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
+            borderRadius: "22px",
+            boxShadow: "0 12px 32px rgba(124, 58, 237, 0.6), 0 0 40px rgba(59, 130, 246, 0.4)",
             marginBottom: "20px"
           }}>
             <span style={{ fontSize: "48px" }}>🤖</span>
           </div>
           <h1 style={{
             fontSize: "32px",
-            fontWeight: "700",
+            fontWeight: "800",
             marginBottom: "8px",
-            background: "linear-gradient(135deg, #667eea 0%, #b39ddb 100%)",
+            background: "linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #34d399 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text"
@@ -206,8 +206,8 @@ export default function LoginPage() {
               }}
               onFocus={(e) => {
                 e.target.style.background = "rgba(255, 255, 255, 0.12)";
-                e.target.style.border = "1px solid rgba(102, 126, 234, 0.5)";
-                e.target.style.boxShadow = "0 0 0 3px rgba(102, 126, 234, 0.1)";
+                e.target.style.border = "1px solid rgba(124, 58, 237, 0.6)";
+                e.target.style.boxShadow = "0 0 0 3px rgba(124, 58, 237, 0.15), 0 0 20px rgba(59, 130, 246, 0.1)";
               }}
               onBlur={(e) => {
                 e.target.style.background = "rgba(255, 255, 255, 0.08)";
@@ -248,8 +248,8 @@ export default function LoginPage() {
               }}
               onFocus={(e) => {
                 e.target.style.background = "rgba(255, 255, 255, 0.12)";
-                e.target.style.border = "1px solid rgba(102, 126, 234, 0.5)";
-                e.target.style.boxShadow = "0 0 0 3px rgba(102, 126, 234, 0.1)";
+                e.target.style.border = "1px solid rgba(124, 58, 237, 0.6)";
+                e.target.style.boxShadow = "0 0 0 3px rgba(124, 58, 237, 0.15), 0 0 20px rgba(59, 130, 246, 0.1)";
               }}
               onBlur={(e) => {
                 e.target.style.background = "rgba(255, 255, 255, 0.08)";
@@ -265,7 +265,7 @@ export default function LoginPage() {
             style={{
               width: "100%",
               padding: "14px",
-              background: loading ? "rgba(156, 163, 175, 0.3)" : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              background: loading ? "rgba(156, 163, 175, 0.3)" : "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
               color: "white",
               border: "none",
               borderRadius: "12px",
@@ -273,20 +273,20 @@ export default function LoginPage() {
               fontWeight: "700",
               cursor: loading ? "not-allowed" : "pointer",
               transition: "all 0.3s ease",
-              boxShadow: loading ? "none" : "0 4px 20px rgba(102, 126, 234, 0.4)",
+              boxShadow: loading ? "none" : "0 6px 24px rgba(124, 58, 237, 0.5), 0 0 30px rgba(59, 130, 246, 0.3)",
               letterSpacing: "0.5px",
               textTransform: "uppercase"
             }}
             onMouseEnter={(e) => {
               if (!loading) {
                 e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 28px rgba(102, 126, 234, 0.5)";
+                e.currentTarget.style.boxShadow = "0 8px 32px rgba(124, 58, 237, 0.6), 0 0 40px rgba(59, 130, 246, 0.4)";
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(102, 126, 234, 0.4)";
+                e.currentTarget.style.boxShadow = "0 6px 24px rgba(124, 58, 237, 0.5), 0 0 30px rgba(59, 130, 246, 0.3)";
               }
             }}
           >

@@ -41,15 +41,17 @@ export default function TeamsPage() {
     <div style={{
       minHeight: "100vh",
       background: `
-        linear-gradient(135deg, rgba(15, 12, 41, 0.95) 0%, rgba(48, 43, 99, 0.95) 50%, rgba(36, 36, 62, 0.95) 100%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 92, 246, 0.03) 2px, rgba(139, 92, 246, 0.03) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(99, 102, 241, 0.03) 2px, rgba(99, 102, 241, 0.03) 4px)
+        linear-gradient(135deg, #0a0e27 0%, #1a1147 30%, #2d1b69 60%, #1e3a8a 100%),
+        radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.16) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(168, 85, 247, 0.06) 2px, rgba(168, 85, 247, 0.06) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(99, 102, 241, 0.05) 2px, rgba(99, 102, 241, 0.05) 4px)
       `,
-      backgroundSize: "100% 100%, 50px 50px, 50px 50px",
+      backgroundSize: "100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px",
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Team Network Background */}
+      {/* Collaborative Network Background */}
       <div style={{
         position: "fixed",
         top: 0,
@@ -59,53 +61,56 @@ export default function TeamsPage() {
         pointerEvents: "none",
         zIndex: 0,
         backgroundImage: `
-          radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.12) 0%, transparent 25%),
-          radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.12) 0%, transparent 25%),
-          radial-gradient(circle at 50% 50%, rgba(99, 130, 246, 0.08) 0%, transparent 35%),
-          linear-gradient(60deg, transparent 47%, rgba(139, 92, 246, 0.02) 47%, rgba(139, 92, 246, 0.02) 53%, transparent 53%),
-          linear-gradient(120deg, transparent 47%, rgba(99, 102, 241, 0.02) 47%, rgba(99, 102, 241, 0.02) 53%, transparent 53%)
+          radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.2) 0%, transparent 30%),
+          radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.18) 0%, transparent 30%),
+          radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+          linear-gradient(60deg, transparent 47%, rgba(168, 85, 247, 0.03) 47%, rgba(168, 85, 247, 0.03) 53%, transparent 53%),
+          linear-gradient(-60deg, transparent 47%, rgba(99, 102, 241, 0.025) 47%, rgba(99, 102, 241, 0.025) 53%, transparent 53%)
         `,
-        backgroundSize: "100% 100%, 100% 100%, 100% 100%, 70px 120px, 70px 120px",
-        opacity: 0.8
+        backgroundSize: "100% 100%, 100% 100%, 100% 100%, 85px 85px, 85px 85px",
+        opacity: 0.9
       }}>
-        {/* Animated Team Nodes */}
+        {/* Animated Team Collaboration Orbs */}
         <div style={{
           position: "absolute",
           top: "15%",
           left: "10%",
-          width: "450px",
-          height: "450px",
-          background: "radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)",
+          width: "520px",
+          height: "520px",
+          background: "radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(139, 92, 246, 0.18) 35%, transparent 70%)",
           borderRadius: "50%",
-          filter: "blur(80px)",
-          animation: "float 10s ease-in-out infinite"
+          filter: "blur(85px)",
+          animation: "float 11s ease-in-out infinite"
         }} />
         <div style={{
           position: "absolute",
           bottom: "15%",
           right: "10%",
-          width: "500px",
-          height: "500px",
-          background: "radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%)",
+          width: "560px",
+          height: "560px",
+          background: "radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(59, 130, 246, 0.18) 35%, transparent 70%)",
           borderRadius: "50%",
-          filter: "blur(80px)",
-          animation: "float 12s ease-in-out infinite reverse"
+          filter: "blur(90px)",
+          animation: "float 13s ease-in-out infinite reverse"
         }} />
         
-        {/* Collaboration Grid */}
+        {/* Team Connection Grid */}
         <div style={{
           position: "absolute",
           top: "40%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "300px",
-          height: "300px",
+          width: "350px",
+          height: "350px",
           background: `
-            repeating-linear-gradient(0deg, transparent, transparent 12px, rgba(139, 92, 246, 0.06) 12px, rgba(139, 92, 246, 0.06) 13px),
-            repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(99, 102, 241, 0.06) 12px, rgba(99, 102, 241, 0.06) 13px)
+            radial-gradient(circle, rgba(168, 85, 247, 0.12) 2px, transparent 2px),
+            radial-gradient(circle, rgba(99, 102, 241, 0.1) 2px, transparent 2px)
           `,
-          opacity: 0.3,
-          animation: "float 18s ease-in-out infinite"
+          backgroundSize: "40px 40px, 40px 40px",
+          backgroundPosition: "0 0, 20px 20px",
+          opacity: 0.4,
+          animation: "float 20s ease-in-out infinite",
+          borderRadius: "20px"
         }} />
       </div>
 
@@ -132,20 +137,20 @@ export default function TeamsPage() {
           }}>
             <div style={{
               padding: "8px",
-              background: "linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)",
-              borderRadius: "10px",
+              background: "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
+              borderRadius: "12px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 4px 16px rgba(139, 92, 246, 0.4)"
+              boxShadow: "0 6px 20px rgba(168, 85, 247, 0.5), 0 0 20px rgba(99, 102, 241, 0.3)"
             }}>
               <span style={{ fontSize: "24px" }}>👥</span>
             </div>
             <h1 style={{
               fontSize: "22px",
-              fontWeight: "700",
+              fontWeight: "800",
               margin: 0,
-              background: "linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)",
+              background: "linear-gradient(135deg, #c084fc 0%, #818cf8 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text"
@@ -216,8 +221,8 @@ export default function TeamsPage() {
               display: "inline-block",
               width: "48px",
               height: "48px",
-              border: "4px solid rgba(139, 92, 246, 0.2)",
-              borderTop: "4px solid rgba(139, 92, 246, 0.8)",
+              border: "4px solid rgba(168, 85, 247, 0.2)",
+              borderTop: "4px solid rgba(168, 85, 247, 0.8)",
               borderRadius: "50%",
               animation: "spin 1s linear infinite",
               marginBottom: "20px"
@@ -233,9 +238,9 @@ export default function TeamsPage() {
             <div style={{
               display: "inline-block",
               padding: "24px",
-              background: "linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)",
+              background: "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
               borderRadius: "24px",
-              boxShadow: "0 8px 32px rgba(139, 92, 246, 0.4)",
+              boxShadow: "0 10px 36px rgba(168, 85, 247, 0.5), 0 0 40px rgba(99, 102, 241, 0.3)",
               marginBottom: "24px"
             }}>
               <span style={{ fontSize: "64px" }}>👥</span>
@@ -322,8 +327,8 @@ export default function TeamsPage() {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateY(-4px)";
-                    e.currentTarget.style.boxShadow = "0 12px 40px 0 rgba(139, 92, 246, 0.4)";
-                    e.currentTarget.style.border = "1px solid rgba(139, 92, 246, 0.3)";
+                    e.currentTarget.style.boxShadow = "0 14px 44px 0 rgba(168, 85, 247, 0.5), 0 0 30px rgba(99, 102, 241, 0.3)";
+                    e.currentTarget.style.border = "1px solid rgba(168, 85, 247, 0.4)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";

@@ -74,15 +74,17 @@ export default function ChatPage() {
       display: "flex",
       flexDirection: "column",
       background: `
-        linear-gradient(135deg, rgba(15, 12, 41, 0.95) 0%, rgba(48, 43, 99, 0.95) 50%, rgba(36, 36, 62, 0.95) 100%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(99, 102, 241, 0.03) 2px, rgba(99, 102, 241, 0.03) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 92, 246, 0.03) 2px, rgba(139, 92, 246, 0.03) 4px)
+        linear-gradient(135deg, #0a0e27 0%, #1a1147 30%, #1e3a8a 60%, #134e4a 100%),
+        radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(124, 58, 237, 0.05) 2px, rgba(124, 58, 237, 0.05) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(6, 182, 212, 0.05) 2px, rgba(6, 182, 212, 0.05) 4px)
       `,
-      backgroundSize: "100% 100%, 50px 50px, 50px 50px",
+      backgroundSize: "100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px",
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* AI Message Flow Background */}
+      {/* AI Conversation Flow Background */}
       <div style={{
         position: "fixed",
         top: 0,
@@ -92,52 +94,54 @@ export default function ChatPage() {
         pointerEvents: "none",
         zIndex: 0,
         backgroundImage: `
-          radial-gradient(circle at 15% 25%, rgba(99, 102, 241, 0.12) 0%, transparent 30%),
-          radial-gradient(circle at 85% 75%, rgba(139, 92, 246, 0.12) 0%, transparent 30%),
-          linear-gradient(45deg, transparent 48%, rgba(99, 102, 241, 0.015) 48%, rgba(99, 102, 241, 0.015) 52%, transparent 52%),
-          linear-gradient(-45deg, transparent 48%, rgba(139, 92, 246, 0.015) 48%, rgba(139, 92, 246, 0.015) 52%, transparent 52%)
+          radial-gradient(circle at 15% 25%, rgba(124, 58, 237, 0.18) 0%, transparent 35%),
+          radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.16) 0%, transparent 35%),
+          linear-gradient(45deg, transparent 48%, rgba(124, 58, 237, 0.025) 48%, rgba(124, 58, 237, 0.025) 52%, transparent 52%),
+          linear-gradient(-45deg, transparent 48%, rgba(6, 182, 212, 0.02) 48%, rgba(6, 182, 212, 0.02) 52%, transparent 52%)
         `,
-        backgroundSize: "100% 100%, 100% 100%, 40px 40px, 40px 40px",
-        opacity: 0.9
+        backgroundSize: "100% 100%, 100% 100%, 50px 50px, 50px 50px",
+        opacity: 0.95
       }}>
-        {/* Animated Data Nodes */}
+        {/* Animated Message Flow Orbs */}
         <div style={{
           position: "absolute",
-          top: "10%",
+          top: "12%",
           left: "10%",
-          width: "400px",
-          height: "400px",
-          background: "radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)",
-          borderRadius: "50%",
-          filter: "blur(80px)",
-          animation: "float 10s ease-in-out infinite"
-        }} />
-        <div style={{
-          position: "absolute",
-          bottom: "10%",
-          right: "10%",
           width: "500px",
           height: "500px",
-          background: "radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, rgba(168, 85, 247, 0.15) 35%, transparent 70%)",
           borderRadius: "50%",
-          filter: "blur(80px)",
-          animation: "float 12s ease-in-out infinite reverse"
+          filter: "blur(85px)",
+          animation: "float 11s ease-in-out infinite"
         }} />
-        
-        {/* Circuit Connections */}
         <div style={{
           position: "absolute",
-          top: "30%",
-          right: "15%",
-          width: "150px",
-          height: "150px",
-          background: `
-            repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(99, 102, 241, 0.08) 8px, rgba(99, 102, 241, 0.08) 9px),
-            repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(99, 102, 241, 0.08) 8px, rgba(99, 102, 241, 0.08) 9px)
-          `,
+          bottom: "12%",
+          right: "10%",
+          width: "550px",
+          height: "550px",
+          background: "radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, rgba(14, 165, 233, 0.15) 35%, transparent 70%)",
           borderRadius: "50%",
-          opacity: 0.4,
-          animation: "pulse 10s ease-in-out infinite"
+          filter: "blur(90px)",
+          animation: "float 14s ease-in-out infinite reverse"
+        }} />
+        
+        {/* Communication Network Nodes */}
+        <div style={{
+          position: "absolute",
+          top: "35%",
+          right: "12%",
+          width: "200px",
+          height: "200px",
+          background: `
+            radial-gradient(circle, rgba(124, 58, 237, 0.15) 2px, transparent 2px),
+            radial-gradient(circle, rgba(6, 182, 212, 0.12) 2px, transparent 2px)
+          `,
+          backgroundSize: "30px 30px, 30px 30px",
+          backgroundPosition: "0 0, 15px 15px",
+          borderRadius: "50%",
+          opacity: 0.45,
+          animation: "pulse 12s ease-in-out infinite"
         }} />
       </div>
 
@@ -162,20 +166,20 @@ export default function ChatPage() {
           }}>
             <div style={{
               padding: "8px",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              borderRadius: "10px",
+              background: "linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)",
+              borderRadius: "12px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 4px 16px rgba(102, 126, 234, 0.4)"
+              boxShadow: "0 6px 20px rgba(124, 58, 237, 0.5), 0 0 20px rgba(6, 182, 212, 0.3)"
             }}>
               <span style={{ fontSize: "24px" }}>🤖</span>
             </div>
             <h1 style={{
               fontSize: "22px",
-              fontWeight: "700",
+              fontWeight: "800",
               margin: 0,
-              background: "linear-gradient(135deg, #667eea 0%, #b39ddb 100%)",
+              background: "linear-gradient(135deg, #a78bfa 0%, #22d3ee 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text"
@@ -248,9 +252,9 @@ export default function ChatPage() {
             <div style={{
               display: "inline-block",
               padding: "24px",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              background: "linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)",
               borderRadius: "24px",
-              boxShadow: "0 8px 32px rgba(102, 126, 234, 0.4)",
+              boxShadow: "0 10px 36px rgba(124, 58, 237, 0.5), 0 0 40px rgba(6, 182, 212, 0.3)",
               marginBottom: "24px"
             }}>
               <span style={{ fontSize: "64px" }}>💬</span>
@@ -282,7 +286,7 @@ export default function ChatPage() {
               padding: "16px 20px",
               borderRadius: "16px",
               background: msg.role === "user" 
-                ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+                ? "linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)"
                 : msg.role === "error" 
                 ? "rgba(239, 68, 68, 0.15)"
                 : "rgba(255, 255, 255, 0.08)",
@@ -297,7 +301,7 @@ export default function ChatPage() {
                 ? "#fca5a5" 
                 : "rgba(255, 255, 255, 0.9)",
               boxShadow: msg.role === "user"
-                ? "0 8px 24px rgba(102, 126, 234, 0.3)"
+                ? "0 8px 28px rgba(124, 58, 237, 0.4), 0 0 20px rgba(6, 182, 212, 0.2)"
                 : "0 4px 16px rgba(0, 0, 0, 0.2)",
               wordBreak: "break-word"
             }}>
@@ -385,8 +389,8 @@ export default function ChatPage() {
             }}
             onFocus={(e) => {
               e.target.style.background = "rgba(255, 255, 255, 0.12)";
-              e.target.style.border = "1px solid rgba(102, 126, 234, 0.5)";
-              e.target.style.boxShadow = "0 0 0 3px rgba(102, 126, 234, 0.1)";
+              e.target.style.border = "1px solid rgba(124, 58, 237, 0.6)";
+              e.target.style.boxShadow = "0 0 0 3px rgba(124, 58, 237, 0.15), 0 0 20px rgba(6, 182, 212, 0.1)";
             }}
             onBlur={(e) => {
               e.target.style.background = "rgba(255, 255, 255, 0.08)";
@@ -401,7 +405,7 @@ export default function ChatPage() {
               padding: "16px 32px",
               background: loading || !message.trim() 
                 ? "rgba(156, 163, 175, 0.3)" 
-                : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                : "linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)",
               color: "white",
               border: "none",
               borderRadius: "12px",
@@ -411,19 +415,19 @@ export default function ChatPage() {
               transition: "all 0.3s ease",
               boxShadow: loading || !message.trim()
                 ? "none"
-                : "0 4px 20px rgba(102, 126, 234, 0.4)",
+                : "0 6px 24px rgba(124, 58, 237, 0.5), 0 0 30px rgba(6, 182, 212, 0.3)",
               letterSpacing: "0.5px"
             }}
             onMouseEnter={(e) => {
               if (!loading && message.trim()) {
                 e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 28px rgba(102, 126, 234, 0.5)";
+                e.currentTarget.style.boxShadow = "0 8px 32px rgba(124, 58, 237, 0.6), 0 0 40px rgba(6, 182, 212, 0.4)";
               }
             }}
             onMouseLeave={(e) => {
               if (!loading && message.trim()) {
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(102, 126, 234, 0.4)";
+                e.currentTarget.style.boxShadow = "0 6px 24px rgba(124, 58, 237, 0.5), 0 0 30px rgba(6, 182, 212, 0.3)";
               }
             }}
           >

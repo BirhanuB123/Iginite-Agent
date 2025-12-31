@@ -28,15 +28,17 @@ export default function Dashboard() {
     <div style={{
       minHeight: "100vh",
       background: `
-        linear-gradient(135deg, rgba(15, 12, 41, 0.95) 0%, rgba(48, 43, 99, 0.95) 50%, rgba(36, 36, 62, 0.95) 100%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(99, 102, 241, 0.03) 2px, rgba(99, 102, 241, 0.03) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 92, 246, 0.03) 2px, rgba(139, 92, 246, 0.03) 4px)
+        linear-gradient(135deg, #0a0e27 0%, #1a1147 30%, #2d1b69 60%, #1e3a8a 100%),
+        radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 92, 246, 0.05) 2px, rgba(139, 92, 246, 0.05) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(59, 130, 246, 0.05) 2px, rgba(59, 130, 246, 0.05) 4px)
       `,
-      backgroundSize: "100% 100%, 50px 50px, 50px 50px",
+      backgroundSize: "100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px",
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* AI Circuit Board Pattern */}
+      {/* AI Neural Network Background */}
       <div style={{
         position: "fixed",
         top: 0,
@@ -46,64 +48,81 @@ export default function Dashboard() {
         pointerEvents: "none",
         zIndex: 0,
         backgroundImage: `
-          radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 25%),
-          radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 25%),
-          radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 30%),
-          linear-gradient(30deg, transparent 48%, rgba(99, 102, 241, 0.02) 48%, rgba(99, 102, 241, 0.02) 52%, transparent 52%),
-          linear-gradient(150deg, transparent 48%, rgba(139, 92, 246, 0.02) 48%, rgba(139, 92, 246, 0.02) 52%, transparent 52%)
+          radial-gradient(circle at 15% 25%, rgba(124, 58, 237, 0.2) 0%, transparent 30%),
+          radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.2) 0%, transparent 30%),
+          radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
+          linear-gradient(45deg, transparent 48%, rgba(124, 58, 237, 0.03) 48%, rgba(124, 58, 237, 0.03) 52%, transparent 52%),
+          linear-gradient(-45deg, transparent 48%, rgba(59, 130, 246, 0.03) 48%, rgba(59, 130, 246, 0.03) 52%, transparent 52%)
         `,
-        backgroundSize: "100% 100%, 100% 100%, 100% 100%, 60px 105px, 60px 105px",
-        opacity: 0.8
+        backgroundSize: "100% 100%, 100% 100%, 100% 100%, 80px 80px, 80px 80px",
+        opacity: 0.9
       }}>
-        {/* Animated Neural Nodes */}
-        <div style={{
-          position: "absolute",
-          top: "20%",
-          left: "5%",
-          width: "500px",
-          height: "500px",
-          background: "radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%)",
-          borderRadius: "50%",
-          filter: "blur(80px)",
-          animation: "float 10s ease-in-out infinite"
-        }} />
-        <div style={{
-          position: "absolute",
-          bottom: "15%",
-          right: "10%",
-          width: "400px",
-          height: "400px",
-          background: "radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)",
-          borderRadius: "50%",
-          filter: "blur(80px)",
-          animation: "float 12s ease-in-out infinite reverse"
-        }} />
-        <div style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "600px",
-          height: "600px",
-          background: "radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)",
-          borderRadius: "50%",
-          filter: "blur(100px)",
-          animation: "pulse 8s ease-in-out infinite"
-        }} />
-        
-        {/* Digital Grid Overlay */}
+        {/* Large Animated Neural Orbs */}
         <div style={{
           position: "absolute",
           top: "10%",
-          right: "5%",
-          width: "200px",
-          height: "200px",
+          left: "8%",
+          width: "600px",
+          height: "600px",
+          background: "radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, rgba(139, 92, 246, 0.15) 35%, transparent 70%)",
+          borderRadius: "50%",
+          filter: "blur(90px)",
+          animation: "float 12s ease-in-out infinite"
+        }} />
+        <div style={{
+          position: "absolute",
+          bottom: "10%",
+          right: "8%",
+          width: "550px",
+          height: "550px",
+          background: "radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.15) 35%, transparent 70%)",
+          borderRadius: "50%",
+          filter: "blur(90px)",
+          animation: "float 15s ease-in-out infinite reverse"
+        }} />
+        <div style={{
+          position: "absolute",
+          top: "45%",
+          right: "15%",
+          width: "450px",
+          height: "450px",
+          background: "radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%)",
+          borderRadius: "50%",
+          filter: "blur(85px)",
+          animation: "pulse 10s ease-in-out infinite"
+        }} />
+        
+        {/* Circuit Board Nodes */}
+        <div style={{
+          position: "absolute",
+          top: "15%",
+          right: "8%",
+          width: "250px",
+          height: "250px",
           background: `
-            repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(99, 102, 241, 0.1) 10px, rgba(99, 102, 241, 0.1) 11px),
-            repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(99, 102, 241, 0.1) 10px, rgba(99, 102, 241, 0.1) 11px)
+            radial-gradient(circle, rgba(124, 58, 237, 0.15) 2px, transparent 2px),
+            radial-gradient(circle, rgba(59, 130, 246, 0.15) 2px, transparent 2px)
+          `,
+          backgroundSize: "50px 50px, 50px 50px",
+          backgroundPosition: "0 0, 25px 25px",
+          opacity: 0.4,
+          animation: "float 18s ease-in-out infinite"
+        }} />
+        
+        {/* Data Flow Lines */}
+        <div style={{
+          position: "absolute",
+          bottom: "20%",
+          left: "10%",
+          width: "300px",
+          height: "300px",
+          background: `
+            repeating-linear-gradient(0deg, transparent, transparent 12px, rgba(16, 185, 129, 0.12) 12px, rgba(16, 185, 129, 0.12) 14px),
+            repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(59, 130, 246, 0.12) 12px, rgba(59, 130, 246, 0.12) 14px)
           `,
           opacity: 0.3,
-          animation: "float 15s ease-in-out infinite"
+          animation: "float 20s ease-in-out infinite",
+          borderRadius: "20px"
         }} />
       </div>
 
@@ -125,20 +144,20 @@ export default function Dashboard() {
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <div style={{
             padding: "10px",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            borderRadius: "12px",
+            background: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
+            borderRadius: "14px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            boxShadow: "0 4px 16px rgba(102, 126, 234, 0.4)"
+            boxShadow: "0 6px 20px rgba(124, 58, 237, 0.5), 0 0 20px rgba(59, 130, 246, 0.3)"
           }}>
             <span style={{ fontSize: "28px" }}>🤖</span>
           </div>
           <h1 style={{
             fontSize: "26px",
-            fontWeight: "700",
+            fontWeight: "800",
             margin: 0,
-            background: "linear-gradient(135deg, #667eea 0%, #b39ddb 100%)",
+            background: "linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #34d399 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -187,20 +206,23 @@ export default function Dashboard() {
         }}>
           <h2 style={{
             fontSize: "48px",
-            fontWeight: "800",
-            background: "linear-gradient(135deg, #ffffff 0%, #b39ddb 100%)",
+            fontWeight: "900",
+            background: "linear-gradient(135deg, #ffffff 0%, #a78bfa 40%, #60a5fa 70%, #34d399 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
             marginBottom: "16px",
-            letterSpacing: "1px"
+            letterSpacing: "1px",
+            textShadow: "0 0 80px rgba(124, 58, 237, 0.3)"
           }}>Welcome to Adwa-Agent</h2>
           <p style={{
             fontSize: "20px",
-            color: "rgba(255, 255, 255, 0.7)",
-            maxWidth: "600px",
-            margin: "0 auto"
-          }}>Your AI-powered multi-tenant assistant for intelligent automation</p>
+            color: "rgba(255, 255, 255, 0.8)",
+            maxWidth: "650px",
+            margin: "0 auto",
+            fontWeight: "400",
+            lineHeight: "1.6"
+          }}>Your AI-powered multi-tenant assistant for intelligent automation and knowledge management</p>
         </div>
 
         {/* Feature Cards */}
@@ -240,14 +262,14 @@ export default function Dashboard() {
               <div style={{
                 width: "64px",
                 height: "64px",
-                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                borderRadius: "16px",
+                background: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
+                borderRadius: "18px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "32px",
                 marginBottom: "20px",
-                boxShadow: "0 8px 24px rgba(102, 126, 234, 0.4)"
+                boxShadow: "0 10px 30px rgba(124, 58, 237, 0.5), 0 0 30px rgba(59, 130, 246, 0.3)"
               }}>💬</div>
               <h3 style={{
                 fontSize: "26px",
@@ -296,14 +318,14 @@ export default function Dashboard() {
               <div style={{
                 width: "64px",
                 height: "64px",
-                background: "linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)",
-                borderRadius: "16px",
+                background: "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
+                borderRadius: "18px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "32px",
                 marginBottom: "20px",
-                boxShadow: "0 8px 24px rgba(139, 92, 246, 0.4)"
+                boxShadow: "0 10px 30px rgba(168, 85, 247, 0.5), 0 0 30px rgba(99, 102, 241, 0.3)"
               }}>👥</div>
               <h3 style={{
                 fontSize: "26px",
@@ -339,14 +361,14 @@ export default function Dashboard() {
             <div style={{
               width: "64px",
               height: "64px",
-              background: "linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)",
-              borderRadius: "16px",
+              background: "linear-gradient(135deg, #3b82f6 0%, #10b981 100%)",
+              borderRadius: "18px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: "32px",
               marginBottom: "20px",
-              boxShadow: "0 8px 24px rgba(59, 130, 246, 0.4)"
+              boxShadow: "0 10px 30px rgba(59, 130, 246, 0.5), 0 0 30px rgba(16, 185, 129, 0.3)"
             }}>📚</div>
             <h3 style={{
               fontSize: "26px",

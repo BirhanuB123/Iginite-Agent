@@ -1,8 +1,8 @@
 {
-  "name": "ignite-agent",
+  "name": "adwa-agent",
   "version": "0.1.0",
   "private": true,
-  "description": "Ignite-Agent multi-tenant backend (NestJS + Prisma + pgvector + OpenAI Responses tool calling)",
+  "description": "Adwa-Agent multi-tenant backend (NestJS + Prisma + pgvector + OpenAI Responses tool calling)",
   "scripts": {
     "dev": "nest start --watch",
     "build": "nest build",

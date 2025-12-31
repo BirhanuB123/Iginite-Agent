@@ -18,6 +18,7 @@ export class RlsInterceptor implements NestInterceptor {
     }
 
     // Each request runs inside an interactive transaction to guarantee SET LOCAL.
+    // Increased timeout to 30s to accommodate AI operations (OpenAI API calls, tool executions)
     return from(
       this.prisma.$transaction(async (tx) => {
         // Set tenant for RLS (transaction-scoped)
@@ -33,6 +34,8 @@ export class RlsInterceptor implements NestInterceptor {
             }
           });
         });
+      }, {
+        timeout: 30000, // 30 seconds for AI operations
       })
     );
   }

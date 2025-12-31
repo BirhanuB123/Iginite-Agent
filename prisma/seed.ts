@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
  * Top-level await is NOT allowed in CommonJS.
  */
 async function main() {
-  console.log('🌱 Seeding Ignite-Agent database...');
+  console.log('🌱 Seeding Adwa-Agent database...');
 
   const tenantId = '00000000-0000-0000-0000-000000000001';
   const tenantId2 = '00000000-0000-0000-0000-000000000002';
@@ -23,7 +23,7 @@ async function main() {
     update: {},
     create: {
       id: tenantId,
-      name: 'Ignite Demo Tenant',
+      name: 'Adwa Demo Tenant',
       status: 'ACTIVE',
       settingsJson: {
         environment: 'local',

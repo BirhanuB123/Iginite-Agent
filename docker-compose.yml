@@ -2,12 +2,12 @@ services:
   db:
     image: pgvector/pgvector:pg16
     environment:
-      POSTGRES_USER: ignite
-      POSTGRES_PASSWORD: ignite
-      POSTGRES_DB: ignite_agent
+      POSTGRES_USER: adwa
+      POSTGRES_PASSWORD: adwa
+      POSTGRES_DB: adwa_agent
     ports:
       - "5432:5432"
     volumes:
-      - ignite_db:/var/lib/postgresql/data
+      - adwa_db:/var/lib/postgresql/data
 volumes:
-  ignite_db:
+  adwa_db:

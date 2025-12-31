@@ -1,5 +1,5 @@
 {
-  "name": "ignite-agent-web",
+  "name": "adwa-agent-web",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",

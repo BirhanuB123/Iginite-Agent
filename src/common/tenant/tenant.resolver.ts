@@ -13,7 +13,7 @@ export class TenantResolver {
       return header;
     }
 
-    // subdomain mode: clientA.ignite-agent.com -> "clientA" (map to UUID in DB in production)
+    // subdomain mode: clientA.adwa-agent.com -> "clientA" (map to UUID in DB in production)
     const host = req.hostname;
     const parts = host.split('.');
     if (parts.length >= 3) return parts[0];

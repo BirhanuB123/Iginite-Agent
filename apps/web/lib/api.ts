@@ -10,8 +10,15 @@ export async function apiFetch(
   // Don't add tenant header for auth endpoints
   const isAuthEndpoint = path.startsWith("/auth/");
 
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:3000";
+  const url = `${apiBase}${path}`;
+  
+  console.log("🚀 API Fetch:", url);
+  console.log("📦 API Base:", apiBase);
+  console.log("📝 Options:", options);
+
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE}${path}`,
+    url,
     {
       ...options,
       headers: {
@@ -23,10 +30,15 @@ export async function apiFetch(
     }
   );
 
+  console.log("✅ Response status:", res.status);
+
   if (!res.ok) {
     const text = await res.text();
+    console.error("❌ API Error:", text);
     throw new Error(text || "API request failed");
   }
 
-  return res.json();
+  const data = await res.json();
+  console.log("✅ Response data:", data);
+  return data;
 }

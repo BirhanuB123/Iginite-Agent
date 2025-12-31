@@ -24,12 +24,17 @@ export class KnowledgeService {
    * Generate embedding for a given text using OpenAI.
    */
   async generateEmbedding(text: string): Promise<number[]> {
-    const response = await this.openai.embeddings.create({
-      model: 'text-embedding-3-small',
-      input: text,
-      dimensions: 1536,
-    });
-    return response.data[0].embedding;
+    try {
+      const response = await this.openai.embeddings.create({
+        model: 'text-embedding-3-small',
+        input: text.slice(0, 8000), // Limit to 8000 chars to avoid token limits
+        dimensions: 1536,
+      });
+      return response.data[0].embedding;
+    } catch (error: any) {
+      console.error('OpenAI embedding error:', error.message);
+      throw new Error(`Failed to generate embedding: ${error.message}`);
+    }
   }
 
   /**

@@ -29,6 +29,7 @@ export class ToolsModule implements OnModuleInit {
           topK: { type: 'number' },
         },
         required: ['query', 'corpus'],
+        additionalProperties: false,
       },
       handler: (ctx, input) => this.knowledgeHandlers.searchKnowledge(ctx, input),
     });
@@ -44,6 +45,7 @@ export class ToolsModule implements OnModuleInit {
           priority: { type: 'string', description: 'LOW | MEDIUM | HIGH | URGENT' },
         },
         required: ['title'],
+        additionalProperties: false,
       },
       handler: (ctx, input) => this.workflowHandlers.createClientRequest(ctx, input),
     });

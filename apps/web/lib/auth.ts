@@ -2,24 +2,24 @@
 
 export function setSession(token: string, tenantId: string) {
   if (typeof window === "undefined") return;
-  localStorage.setItem("ignite_token", token);
-  localStorage.setItem("ignite_tenant_id", tenantId);
+  localStorage.setItem("adwa_token", token);
+  localStorage.setItem("adwa_tenant_id", tenantId);
 }
 
 export function clearSession() {
   if (typeof window === "undefined") return;
-  localStorage.removeItem("ignite_token");
-  localStorage.removeItem("ignite_tenant_id");
+  localStorage.removeItem("adwa_token");
+  localStorage.removeItem("adwa_tenant_id");
 }
 
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;
-  return localStorage.getItem("ignite_token");
+  return localStorage.getItem("adwa_token");
 }
 
 export function getTenantId(): string | null {
   if (typeof window === "undefined") return null;
-  return localStorage.getItem("ignite_tenant_id");
+  return localStorage.getItem("adwa_tenant_id");
 }
 
 export function isAuthenticated(): boolean {
